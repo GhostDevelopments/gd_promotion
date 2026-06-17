@@ -31,7 +31,9 @@ lib.callback.register("qbx_promo:server:attemptPromotion", function(source, mess
         })
 
         -- Broadcast to everyone
-        TriggerClientEvent("qbx_promo:client:announce", -1, jobConfig.label, message)
+        local charinfo = player.PlayerData.charinfo
+        local fullName = ("%s %s"):format(charinfo.firstname, charinfo.lastname)
+        TriggerClientEvent("qbx_promo:client:announce", -1, jobConfig.label, message, fullName)
         return true
     end
 
