@@ -1,57 +1,57 @@
 let announcementTimeout = null;
+let hideTimeout1 = null;
+let hideTimeout2 = null;
 
 window.addEventListener("message", (event) => {
-    const { action, data } = event.data;
+  const { action, data } = event.data;
 
-    if (action === "announce") {
-        showAnnouncement(data);
-    }
+  if (action === "announce") {
+    showAnnouncement(data);
+  }
 });
 
 const showAnnouncement = (data) => {
-    const container = document.getElementById("announcement-container");
-    const headerText = document.getElementById("header-text");
-    const businessLabel = document.getElementById("business-label");
-    const messageText = document.getElementById("message-text");
+  const container = document.getElementById("announcement-container");
+  const businessLabel = document.getElementById("business-label");
+  const jobLabel = document.getElementById("job-label");
+  const senderName = document.getElementById("sender-name");
+  const messageText = document.getElementById("message-text");
 
-    // Clear existing timeout if any
-    if (announcementTimeout) {
-        clearTimeout(announcementTimeout);
-    }
+  // Clear all existing timeouts to prevent race conditions
+  if (announcementTimeout) clearTimeout(announcementTimeout);
+  if (hideTimeout1) clearTimeout(hideTimeout1);
+  if (hideTimeout2) clearTimeout(hideTimeout2);
 
-    // Set content
-    headerText.innerText = data.header || "Business Announcement";
-    businessLabel.innerText = data.label;
-    messageText.innerText = `"${data.message}"`;
+  // Set content
+  businessLabel.innerText = data.label;
+  jobLabel.innerText = data.label;
+  senderName.innerText = data.sender;
+  messageText.innerText = data.message;
 
-    // Show body
-    document.body.classList.remove("opacity-0");
-    document.body.classList.add("opacity-100");
+  // Ensure container is visible and reset animations
+  container.classList.remove("hidden", "animate-slide-up", "opacity-0");
+  container.classList.add("block", "opacity-100");
 
-    // Reset container classes and show
-    container.classList.remove("hidden", "animate-slide-up");
-    container.classList.add("block");
-
-    // Set timeout to hide
-    announcementTimeout = setTimeout(() => {
-        hideAnnouncement();
-    }, data.duration || 10000);
+  // Set timeout to hide
+  announcementTimeout = setTimeout(() => {
+    hideAnnouncement();
+  }, data.duration || 10000);
 };
 
 const hideAnnouncement = () => {
-    const container = document.getElementById("announcement-container");
-    
-    // Add slide up animation
-    container.classList.add("animate-slide-up");
+  const container = document.getElementById("announcement-container");
+  
+  // 1. Start slide up animation
+  container.classList.add("animate-slide-up");
 
-    // Fade out body
-    setTimeout(() => {
-        document.body.classList.remove("opacity-100");
-        document.body.classList.add("opacity-0");
-        
-        setTimeout(() => {
-            container.classList.add("hidden");
-            container.classList.remove("block", "animate-slide-up");
-        }, 500);
+  // 2. Fade out container after slide starts
+  hideTimeout1 = setTimeout(() => {
+    container.classList.replace("opacity-100", "opacity-0");
+    
+    // 3. Fully hide once transitions are done
+    hideTimeout2 = setTimeout(() => {
+      container.classList.add("hidden");
+      container.classList.remove("block", "animate-slide-up");
     }, 500);
+  }, 300);
 };
