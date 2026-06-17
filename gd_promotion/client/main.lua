@@ -79,13 +79,14 @@ RegisterCommand("promote", function()
     openPromotionMenu()
 end, false)
 
-RegisterNetEvent("qbx_promo:client:announce", function(businessLabel, message)
+RegisterNetEvent("qbx_promo:client:announce", function(businessLabel, message, senderName)
     SendNUIMessage({
         action = "announce",
         data = {
             header = Config.Locales["broadcast_header"],
             label = businessLabel,
             message = message,
+            sender = senderName,
             duration = Config.DisplayDuration
         }
     })
