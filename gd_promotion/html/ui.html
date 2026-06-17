@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#228be6',
+            dark: {
+              100: '#1A1B1E',
+              200: '#141517',
+              300: '#101113',
+            }
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          animation: {
+            'slide-down': 'slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+            'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+            'pulse-soft': 'pulseSoft 3s infinite',
+          },
+          keyframes: {
+            slideDown: {
+              '0%': { transform: 'translateY(-100%)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(0)', opacity: '1' },
+              '100%': { transform: 'translateY(-100%)', opacity: '0' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0.8' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Announcement</title>
+</head>
+<body class="bg-transparent w-screen h-screen overflow-hidden pointer-events-none flex justify-center pt-12 opacity-0 transition-opacity duration-500">
+  
+  <div id="announcement-container" class="max-w-2xl w-full hidden">
+    <!-- Main Card -->
+    <div class="relative overflow-hidden rounded-2xl bg-dark-200/95 backdrop-blur-md border-b-4 border-primary shadow-2xl animate-slide-down">
+      
+      <!-- Accent Top Bar -->
+      <div class="h-1.5 w-full bg-gradient-to-r from-primary/20 via-primary to-primary/20"></div>
+
+      <div class="px-8 py-6">
+        <!-- Header -->
+        <div class="flex items-center gap-4 mb-4">
+          <div class="p-2.5 bg-primary/10 rounded-xl">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.167H3.382a.705.705 0 01-.685-.833 11.013 11.013 0 011.683-3.604 1.75 1.75 0 011.551-.832h.584l2.147-6.167a1.76 1.76 0 013.417.592zM17.273 19.21a1.5 1.5 0 002.106 0l.216-.216a1.5 1.5 0 000-2.106l-2.465-2.465a1.5 1.5 0 00-2.106 0l-.216.216a1.5 1.5 0 000 2.106l2.465 2.465zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+            </svg>
+          </div>
+          <div>
+            <h4 id="header-text" class="text-xs font-extrabold text-primary tracking-[0.2em] uppercase opacity-70">
+              Business Announcement
+            </h4>
+            <h2 id="business-label" class="text-2xl font-extrabold text-white leading-tight">
+              PDM Dealership
+            </h2>
+          </div>
+        </div>
+
+        <!-- Message Body -->
+        <div class="relative">
+          <p id="message-text" class="text-lg text-white/90 font-medium leading-relaxed italic">
+            "We are now open! Come check out our new stock of luxury vehicles at discounted prices for the next hour!"
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer / Visual detail -->
+      <div class="px-8 py-3 bg-dark-300/50 border-t border-white/5 flex justify-between items-center">
+        <span class="text-[10px] text-white/30 font-bold tracking-widest uppercase">Broadcast System</span>
+        <div class="flex gap-1">
+            <div class="w-1 h-1 rounded-full bg-primary/40"></div>
+            <div class="w-1 h-1 rounded-full bg-primary/40 animate-pulse"></div>
+            <div class="w-1 h-1 rounded-full bg-primary/40"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
