@@ -1,8 +1,8 @@
 fx_version "cerulean"
 game "gta5"
 
-author "SwisserAI"
-description "Generated with SwisserAI - https://ai.swisser.dev"
+author "Ghost Developments"
+description "Business Promotions"
 version "1.0.0"
 
 ui_page "html/ui.html"
