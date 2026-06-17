@@ -9,33 +9,23 @@
       theme: {
         extend: {
           colors: {
-            primary: '#228be6',
-            dark: {
-              100: '#1A1B1E',
-              200: '#141517',
-              300: '#101113',
-            }
+            brand: "#3b82f6",
           },
           fontFamily: {
-            sans: ['Manrope', 'sans-serif'],
+            sans: ["Inter", "Manrope", "sans-serif"],
           },
           animation: {
-            'slide-down': 'slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-            'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-            'pulse-soft': 'pulseSoft 3s infinite',
+            'slide-down': 'slideDown 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+            'slide-up': 'slideUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards',
           },
           keyframes: {
             slideDown: {
-              '0%': { transform: 'translateY(-100%)', opacity: '0' },
+              '0%': { transform: 'translateY(-20px)', opacity: '0' },
               '100%': { transform: 'translateY(0)', opacity: '1' },
             },
             slideUp: {
               '0%': { transform: 'translateY(0)', opacity: '1' },
-              '100%': { transform: 'translateY(-100%)', opacity: '0' },
-            },
-            pulseSoft: {
-              '0%, 100%': { opacity: '1' },
-              '50%': { opacity: '0.8' },
+              '100%': { transform: 'translateY(-20px)', opacity: '0' },
             }
           }
         }
@@ -43,56 +33,45 @@
     }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <title>Announcement</title>
 </head>
-<body class="bg-transparent w-screen h-screen overflow-hidden pointer-events-none flex justify-end p-6">
+<body class="bg-transparent w-screen h-screen overflow-hidden pointer-events-none flex items-center justify-end p-12">
   
-  <div id="announcement-container" class="w-[320px] hidden transition-opacity duration-500 opacity-0">
-    <!-- Main Card -->
-    <div class="relative overflow-hidden rounded-xl border border-white/10 animate-slide-down bg-black/40">
+  <div id="announcement-container" class="hidden">
+    <!-- Image-styled Notification Card -->
+    <div class="relative flex gap-4 p-5 rounded bg-[#2a2a2a]/95 border border-white/10 shadow-2xl animate-slide-down min-w-[380px] max-w-[450px]">
       
-      <!-- Top Glow Border -->
-      <div class="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-80"></div>
+      <!-- Ad Badge Container -->
+      <div class="flex-shrink-0 pt-1.5">
+        <div class="bg-[#facc15] text-black text-[11px] font-[900] px-1.5 py-0.5 rounded-sm tracking-tighter uppercase">
+          Ad
+        </div>
+      </div>
 
-      <div class="p-4">
-        <!-- Header -->
-        <div class="flex gap-3">
-          <!-- Icon Container -->
-          <div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center border border-primary/20">
-            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.167H3.382a.705.705 0 01-.685-.833 11.013 11.013 0 011.683-3.604 1.75 1.75 0 011.551-.832h.584l2.147-6.167a1.76 1.76 0 013.417.592z" />
-            </svg>
-          </div>
-
-          <div class="flex-1 pt-0.5">
-            <h4 id="header-text" class="text-[8px] font-black text-primary tracking-[0.2em] uppercase opacity-80 mb-0.5">
-              Business Announcement
-            </h4>
-            <h2 id="business-label" class="text-base font-extrabold text-white leading-tight">
-              PDM Dealership
-            </h2>
-          </div>
+      <!-- Content Area -->
+      <div class="flex flex-col space-y-0.5">
+        <h2 class="text-[16px] font-bold text-white/90 leading-tight">
+          Business Promotion - <span id="business-label">Tokyo</span>
+        </h2>
+        
+        <div id="sender-name" class="text-[14px] text-white/40 font-medium">
+          Jimmy Cooper
+        </div>
+        
+        <div class="text-[14px] text-white/40 font-medium pb-1.5">
+          Job: <span id="job-label">Tokyo</span>
         </div>
 
-        <!-- Message Body -->
-        <div class="mt-2.5 pl-[52px]">
-          <p id="message-text" class="text-xs text-white/70 font-semibold leading-relaxed italic">
-            "We are now open! Come check out our new stock!"
+        <div class="flex items-start gap-2 pt-1 border-t border-white/5">
+          <div class="text-white/30 text-[14px] pt-0.5">•</div>
+          <p id="message-text" class="text-[14px] text-white/60 font-medium leading-relaxed italic">
+            Mechanic Shop is now open! Pull up & get your car tuned. Postal 101.
           </p>
         </div>
       </div>
 
-      <!-- Footer -->
-      <div class="px-4 py-2 bg-white/[0.03] border-t border-white/5 flex justify-between items-center">
-        <span class="text-[7px] text-white/20 font-black tracking-[0.2em] uppercase">Broadcast System</span>
-        <div class="flex gap-1 opacity-30">
-            <div class="w-1 h-1 rounded-full bg-primary"></div>
-            <div class="w-1 h-1 rounded-full bg-primary"></div>
-            <div class="w-1 h-1 rounded-full bg-primary animate-pulse"></div>
-        </div>
-      </div>
     </div>
   </div>
 
